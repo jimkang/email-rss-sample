@@ -1,0 +1,35 @@
+{
+  "name": "email-rss-sample",
+  "version": "1.0.0",
+  "description": "Grabs several RSS feeds and picks samples from each one from the given time period, then generates an email summary and sends it via sendmail.",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jimkang/email-rss-sample.git"
+  },
+  "keywords": [
+    "email",
+    "rss"
+  ],
+  "author": "Jim Kang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jimkang/email-rss-sample/issues"
+  },
+  "homepage": "https://github.com/jimkang/email-rss-sample",
+  "devDependencies": {
+    "assert-no-error": "^1.0.0",
+    "d3-queue": "^3.0.7",
+    "serve-static": "^1.14.1",
+    "tape": "^4.11.0"
+  },
+  "dependencies": {
+    "lodash.pluck": "^3.1.2",
+    "probable": "^2.1.4",
+    "seedrandom": "^3.0.1",
+    "standard-bail": "^2.0.1"
+  }
+}
