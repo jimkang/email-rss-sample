@@ -23,10 +23,12 @@
   "devDependencies": {
     "assert-no-error": "^1.0.0",
     "d3-queue": "^3.0.7",
-    "serve-static": "^1.14.1",
+    "pushstate-server": "^3.1.0",
+    "request": "^2.88.0",
     "tape": "^4.11.0"
   },
   "dependencies": {
+    "feed-read": "0.0.1",
     "lodash.pluck": "^3.1.2",
     "probable": "^2.1.4",
     "seedrandom": "^3.0.1",

@@ -1,52 +1,57 @@
 /* global __dirname */
 
 var test = require('tape');
-var http = require('http');
-var serveStatic = require('serve-static');
+var server = require('pushstate-server');
 var queue = require('d3-queue').queue;
 var samplePosts = require('../sample-posts');
 var assertNoError = require('assert-no-error');
 var seedrandom = require('seedrandom');
+//var request = require('request');
 
-const baseURL = 'http://localhost:3100';
+const testServerPort = 3100;
+const baseURL = `http://localhost:${testServerPort}`;
 
 var testCases = [
   {
     name: 'Sample one post within the last day for each feed',
     seed: 'one-post-one-day',
-    feeds: [`${baseURL}/godtributes.rss`, `${baseURL}/colorer.rss`],
+    feedURLs: [`${baseURL}/godtributes.rss`, `${baseURL}/colorer.rss`],
     expected: []
   }
 ];
 
-var serve = serveStatic(__dirname + '/fixtures/');
-var server = http.createServer(onRequest);
-function onRequest(req, res) {
-  serve(req, res, () => {});
-}
+server.start({
+  port: testServerPort,
+  directories: [__dirname + '/fixtures/']
+});
+debugger;
+setTimeout(startTests, 100);
 
-server.listen(3100);
+function startTests() {
+  var q = queue(1);
+  testCases.forEach(queueTest);
+  q.awaitAll(logTestRunError);
 
-var q = queue(1);
-testCases.forEach(queueTest);
-q.awaitAll(closeServer);
-
-function queueTest(testCase) {
-  q.defer(runTest, testCase);
+  function queueTest(testCase) {
+    q.defer(runTest, testCase);
+  }
 }
 
 function runTest(testCase, runDone) {
   test(testCase.name, testSampleRSS);
 
   function testSampleRSS(t) {
-    console.log('running test');
-    var now = new Date();
-    var yesterday = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+    //request(testCase.feedURLs[0], (error, res, body) => console.log(error, res, body));
+
+    //var now = new Date();
+    var endDate = new Date('2019-07-25');
+    var startDate = new Date(endDate.getTime() - 24 * 60 * 60 * 1000);
     samplePosts(
       {
         random: seedrandom(testCase.seed),
-        feeds: testCase.feeds,
-        startDate: yesterday
+        feedURLs: testCase.feedURLs,
+        startDate,
+        endDate
       },
       checkSample
     );
@@ -59,9 +64,8 @@ function runTest(testCase, runDone) {
   }
 }
 
-function closeServer(error) {
+function logTestRunError(error) {
   if (error) {
     console.log(error);
   }
-  server.close();
 }
