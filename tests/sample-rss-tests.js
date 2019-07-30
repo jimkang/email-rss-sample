@@ -1,7 +1,7 @@
 /* global __dirname */
 
 var test = require('tape');
-var server = require('pushstate-server');
+var pushstateServer = require('pushstate-server');
 var queue = require('d3-queue').queue;
 var samplePosts = require('../sample-posts');
 var assertNoError = require('assert-no-error');
@@ -20,17 +20,16 @@ var testCases = [
   }
 ];
 
-server.start({
+var server = pushstateServer.start({
   port: testServerPort,
   directories: [__dirname + '/fixtures/']
 });
-debugger;
 setTimeout(startTests, 100);
 
 function startTests() {
   var q = queue(1);
   testCases.forEach(queueTest);
-  q.awaitAll(logTestRunError);
+  q.awaitAll(tearDown);
 
   function queueTest(testCase) {
     q.defer(runTest, testCase);
@@ -64,8 +63,9 @@ function runTest(testCase, runDone) {
   }
 }
 
-function logTestRunError(error) {
+function tearDown(error) {
   if (error) {
     console.log(error);
   }
+  server.close();
 }
