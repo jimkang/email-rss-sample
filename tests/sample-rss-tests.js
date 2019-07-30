@@ -10,13 +10,42 @@ var seedrandom = require('seedrandom');
 
 const testServerPort = 3100;
 const baseURL = `http://localhost:${testServerPort}`;
+const dayInMS = 24 * 60 * 60 * 1000;
 
 var testCases = [
   {
     name: 'Sample one post within the last day for each feed',
     seed: 'one-post-one-day',
     feedURLs: [`${baseURL}/godtributes.rss`, `${baseURL}/colorer.rss`],
-    expected: []
+    endDate: new Date('2019-07-25'),
+    startDate: new Date('2019-07-25').getTime() - dayInMS,
+    expectedPostCount: [1, 1] // One in each sample feed.
+  },
+  {
+    name: 'Sample one post within the last day for one feed',
+    seed: 'one-post-one-day-one-feed',
+    feedURLs: [`${baseURL}/godtributes.rss`],
+    endDate: new Date('2019-07-25'),
+    startDate: new Date('2019-07-25').getTime() - dayInMS,
+    expectedPostCount: [1] // One sample in one feed.
+  },
+  {
+    name: 'Sample five posts within the last day for each feed',
+    seed: 'five-posts-one-day',
+    feedURLs: [`${baseURL}/godtributes.rss`, `${baseURL}/colorer.rss`],
+    endDate: new Date('2019-07-25'),
+    startDate: new Date('2019-07-25').getTime() - dayInMS,
+    postsPerFeed: 5,
+    expectedPostCount: [2, 2] // There's actually only two posts in a day.
+  },
+  {
+    name: 'Sample five posts within a week-long span for each feed',
+    seed: 'five-posts-one-week',
+    feedURLs: [`${baseURL}/godtributes.rss`, `${baseURL}/colorer.rss`],
+    endDate: new Date('2019-07-16'),
+    startDate: new Date('2019-07-16').getTime() - dayInMS * 7,
+    postsPerFeed: 5,
+    expectedPostCount: [5, 0] // There are no Colorer posts in that range.
   }
 ];
 
@@ -40,25 +69,54 @@ function runTest(testCase, runDone) {
   test(testCase.name, testSampleRSS);
 
   function testSampleRSS(t) {
-    //request(testCase.feedURLs[0], (error, res, body) => console.log(error, res, body));
-
-    //var now = new Date();
-    var endDate = new Date('2019-07-25');
-    var startDate = new Date(endDate.getTime() - 24 * 60 * 60 * 1000);
     samplePosts(
       {
         random: seedrandom(testCase.seed),
         feedURLs: testCase.feedURLs,
-        startDate,
-        endDate
+        startDate: testCase.startDate,
+        endDate: testCase.endDate,
+        postsPerFeed: testCase.postsPerFeed
       },
       checkSample
     );
-    function checkSample(error, posts) {
+
+    function checkSample(error, feedPostGroups) {
       assertNoError(t.ok, error, 'No error when sampling posts.');
-      t.deepEqual(posts, testCase.expected, 'Sampled posts are correct.');
+      t.equal(
+        feedPostGroups.length,
+        testCase.expectedPostCount.length,
+        'Get the correct number of sample feeds.'
+      );
+      feedPostGroups.forEach(checkFeedPostGroup);
       t.end();
       runDone();
+    }
+
+    function checkFeedPostGroup(feedPostGroup, i) {
+      t.equal(
+        feedPostGroup.length,
+        testCase.expectedPostCount[i],
+        'Get the correct number of posts in each sample feed.'
+      );
+      feedPostGroup.forEach(checkFeedPost);
+    }
+
+    function checkFeedPost(post) {
+      t.ok(post.content, 'Post has content.');
+      t.ok(
+        post.published instanceof Date,
+        'Post has a published property that is a date.'
+      );
+      t.ok(
+        post.published > testCase.startDate &&
+          post.published <= testCase.endDate,
+        'Post published date is in specified range.'
+      );
+      t.ok(post.link, 'Post has a link.');
+      console.log(
+        'Check this link with a glance. (Every post should have a different link related to its source feed.)',
+        post.link
+      );
     }
   }
 }
