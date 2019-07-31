@@ -20,3 +20,12 @@ test:
 	node tests/sample-rss-tests.js
 	node tests/format-rss-posts-into-html-tests.js
 
+build-email:
+	node sample-rss-into-html.js \
+		-styleMarkupFile behavior/default-style.html \
+		https://smidgeo.com/bots/godtributes/rss/index.rss \
+		https://smidgeo.com/bots/colorer/rss/index.rss \
+		https://smidgeo.com/bots/autocompletejok/rss/index.rss \
+		https://smidgeo.com/bots/hills/rss/index.rss \
+		> launch-bay/email.html
+
