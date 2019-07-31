@@ -1,0 +1,209 @@
+{
+  "one-post-each-from-two-feeds": [
+    {
+      "posts": [
+        {
+          "title": "No title",
+          "content": "<li class=\"pane\">\n  <div class=\"time-stamp entry-meta\">\n    <a href=\"godtributes-MmknZfRX.html\">\n      <time datetime=\"2019-07-24T09:00:03.396Z\">2019-7-24 05:00:03</time>\n    </a>\n  </div><div class=\"text-caption\"><img src=\"https://smidgeo.com/bots/godtributes/images/icon.png\" alt=\"GODTRIBUTES!\"> AURIFIEDS UNTO THE AURIFIED THRONE</div>\n</li>",
+          "published": "2019-07-24T09:00:03.000Z",
+          "author": "",
+          "link": "https://smidgeo.com/bots/godtributes/godtributes-MmknZfRX.html",
+          "feed": {
+            "source": "http://localhost:3100/godtributes.rss",
+            "link": "https://smidgeo.com/bots/godtributes/",
+            "name": "@godtributes"
+          }
+        }
+      ],
+      "feedMetadata": {
+        "title": "@godtributes",
+        "link": "https://smidgeo.com/bots/godtributes/"
+      }
+    },
+    {
+      "posts": [
+        {
+          "title": "No title",
+          "content": "<li class=\"pane\">\n  <div class=\"time-stamp entry-meta\">\n    <a href=\"coloring--wCPbhpgY.html\">\n      <time datetime=\"2019-07-24T12:02:55.309Z\">2019-7-24 08:02:55</time>\n    </a>\n  </div><img src=\"https://smidgeo.com/bots/colorer/media/coloring--wCPbhpgY.png\" alt=\"Recoloring of \"Head of a Woman in Three Quarter View\" in the Internet Archive\"></img><div class=\"media-caption entry-meta\">Recoloring of \"Head of a Woman in Three Quarter View\" in the Internet Archive | <a href=\"https://archive.org/details/mma_head_of_a_woman_in_three_quarter_view_376869\">Original</a> | <a href=\"http://jimkang.com/colorer-web/#displaySrcImage=no&hideUi=yes&srcImgUrl=https://ia600309.us.archive.org/24/items/mma_head_of_a_woman_in_three_quarter_view_376869/376869.jpg&runs=%5B%7B%22renderer%22%3A%22replacer%22%2C%22quant%22%3A186%2C%22grayscale%22%3A%22no%22%2C%22recolorMode%22%3A%22random%22%2C%22showBase%22%3A%22no%22%2C%22opacityPercentOverBase%22%3A65%2C%22minimumValueDifference%22%3A0.2%2C%22numberOfRetriesToAvoidSingleColor%22%3A8%7D%5D\">Colorer source</a></div></li>",
+          "published": "2019-07-24T12:02:55.000Z",
+          "author": "",
+          "link": "https://smidgeo.com/bots/colorer/coloring--wCPbhpgY.html",
+          "feed": {
+            "source": "http://localhost:3100/colorer.rss",
+            "link": "https://smidgeo.com/bots/colorer/",
+            "name": "Colorer Bot"
+          }
+        }
+      ],
+      "feedMetadata": {
+        "title": "Colorer Bot",
+        "link": "https://smidgeo.com/bots/colorer/"
+      }
+    }
+  ],
+  "one-post-from-one-feed": [
+    {
+      "posts": [
+        {
+          "title": "No title",
+          "content": "<li class=\"pane\">\n  <div class=\"time-stamp entry-meta\">\n    <a href=\"godtributes-MrrAlPQr.html\">\n      <time datetime=\"2019-07-24T01:00:04.609Z\">2019-7-23 21:00:04</time>\n    </a>\n  </div><div class=\"text-caption\"><img src=\"https://smidgeo.com/bots/godtributes/images/icon.png\" alt=\"GODTRIBUTES!\"> PENTICLES FOR THE PENTICLE GOD</div>\n</li>",
+          "published": "2019-07-24T01:00:04.000Z",
+          "author": "",
+          "link": "https://smidgeo.com/bots/godtributes/godtributes-MrrAlPQr.html",
+          "feed": {
+            "source": "http://localhost:3100/godtributes.rss",
+            "link": "https://smidgeo.com/bots/godtributes/",
+            "name": "@godtributes"
+          }
+        }
+      ],
+      "feedMetadata": {
+        "title": "@godtributes",
+        "link": "https://smidgeo.com/bots/godtributes/"
+      }
+    }
+  ],
+  "two-posts-from-two-feeds": [
+    {
+      "posts": [
+        {
+          "title": "No title",
+          "content": "<li class=\"pane\">\n  <div class=\"time-stamp entry-meta\">\n    <a href=\"godtributes-MrrAlPQr.html\">\n      <time datetime=\"2019-07-24T01:00:04.609Z\">2019-7-23 21:00:04</time>\n    </a>\n  </div><div class=\"text-caption\"><img src=\"https://smidgeo.com/bots/godtributes/images/icon.png\" alt=\"GODTRIBUTES!\"> PENTICLES FOR THE PENTICLE GOD</div>\n</li>",
+          "published": "2019-07-24T01:00:04.000Z",
+          "author": "",
+          "link": "https://smidgeo.com/bots/godtributes/godtributes-MrrAlPQr.html",
+          "feed": {
+            "source": "http://localhost:3100/godtributes.rss",
+            "link": "https://smidgeo.com/bots/godtributes/",
+            "name": "@godtributes"
+          }
+        },
+        {
+          "title": "No title",
+          "content": "<li class=\"pane\">\n  <div class=\"time-stamp entry-meta\">\n    <a href=\"godtributes-MmknZfRX.html\">\n      <time datetime=\"2019-07-24T09:00:03.396Z\">2019-7-24 05:00:03</time>\n    </a>\n  </div><div class=\"text-caption\"><img src=\"https://smidgeo.com/bots/godtributes/images/icon.png\" alt=\"GODTRIBUTES!\"> AURIFIEDS UNTO THE AURIFIED THRONE</div>\n</li>",
+          "published": "2019-07-24T09:00:03.000Z",
+          "author": "",
+          "link": "https://smidgeo.com/bots/godtributes/godtributes-MmknZfRX.html",
+          "feed": {
+            "source": "http://localhost:3100/godtributes.rss",
+            "link": "https://smidgeo.com/bots/godtributes/",
+            "name": "@godtributes"
+          }
+        }
+      ],
+      "feedMetadata": {
+        "title": "@godtributes",
+        "link": "https://smidgeo.com/bots/godtributes/"
+      }
+    },
+    {
+      "posts": [
+        {
+          "title": "No title",
+          "content": "<li class=\"pane\">\n  <div class=\"time-stamp entry-meta\">\n    <a href=\"coloring--ZlKIwRoP.html\">\n      <time datetime=\"2019-07-24T04:02:51.004Z\">2019-7-24 00:02:51</time>\n    </a>\n  </div><img src=\"https://smidgeo.com/bots/colorer/media/coloring--ZlKIwRoP.png\" alt=\"Recoloring of \"abstract_36\" from the unsplash collection in the Internet Archive\"></img><div class=\"media-caption entry-meta\">Recoloring of \"abstract_36\" from the unsplash collection in the Internet Archive | <a href=\"https://archive.org/details/abstract_36\">Original</a> | <a href=\"http://jimkang.com/colorer-web/#displaySrcImage=no&hideUi=yes&srcImgUrl=https://ia600107.us.archive.org/24/items/abstract_36/abstract_36.jpg&runs=%5B%7B%22renderer%22%3A%22replacer%22%2C%22quant%22%3A92%2C%22grayscale%22%3A%22yes%22%2C%22recolorMode%22%3A%22random%22%2C%22showBase%22%3A%22yes%22%2C%22opacityPercentOverBase%22%3A30%2C%22minimumValueDifference%22%3A0.2%2C%22numberOfRetriesToAvoidSingleColor%22%3A5%7D%5D\">Colorer source</a></div></li>",
+          "published": "2019-07-24T04:02:51.000Z",
+          "author": "",
+          "link": "https://smidgeo.com/bots/colorer/coloring--ZlKIwRoP.html",
+          "feed": {
+            "source": "http://localhost:3100/colorer.rss",
+            "link": "https://smidgeo.com/bots/colorer/",
+            "name": "Colorer Bot"
+          }
+        },
+        {
+          "title": "No title",
+          "content": "<li class=\"pane\">\n  <div class=\"time-stamp entry-meta\">\n    <a href=\"coloring--wCPbhpgY.html\">\n      <time datetime=\"2019-07-24T12:02:55.309Z\">2019-7-24 08:02:55</time>\n    </a>\n  </div><img src=\"https://smidgeo.com/bots/colorer/media/coloring--wCPbhpgY.png\" alt=\"Recoloring of \"Head of a Woman in Three Quarter View\" in the Internet Archive\"></img><div class=\"media-caption entry-meta\">Recoloring of \"Head of a Woman in Three Quarter View\" in the Internet Archive | <a href=\"https://archive.org/details/mma_head_of_a_woman_in_three_quarter_view_376869\">Original</a> | <a href=\"http://jimkang.com/colorer-web/#displaySrcImage=no&hideUi=yes&srcImgUrl=https://ia600309.us.archive.org/24/items/mma_head_of_a_woman_in_three_quarter_view_376869/376869.jpg&runs=%5B%7B%22renderer%22%3A%22replacer%22%2C%22quant%22%3A186%2C%22grayscale%22%3A%22no%22%2C%22recolorMode%22%3A%22random%22%2C%22showBase%22%3A%22no%22%2C%22opacityPercentOverBase%22%3A65%2C%22minimumValueDifference%22%3A0.2%2C%22numberOfRetriesToAvoidSingleColor%22%3A8%7D%5D\">Colorer source</a></div></li>",
+          "published": "2019-07-24T12:02:55.000Z",
+          "author": "",
+          "link": "https://smidgeo.com/bots/colorer/coloring--wCPbhpgY.html",
+          "feed": {
+            "source": "http://localhost:3100/colorer.rss",
+            "link": "https://smidgeo.com/bots/colorer/",
+            "name": "Colorer Bot"
+          }
+        }
+      ],
+      "feedMetadata": {
+        "title": "Colorer Bot",
+        "link": "https://smidgeo.com/bots/colorer/"
+      }
+    }
+  ],
+  "five-posts-from-one-feed-zero-posts-from-another": [
+    {
+      "posts": [
+        {
+          "title": "No title",
+          "content": "<li class=\"pane\">\n  <div class=\"time-stamp entry-meta\">\n    <a href=\"godtributes-zqkwTPYf.html\">\n      <time datetime=\"2019-07-15T09:00:03.034Z\">2019-7-15 05:00:03</time>\n    </a>\n  </div><div class=\"text-caption\"><img src=\"https://smidgeo.com/bots/godtributes/images/icon.png\" alt=\"GODTRIBUTES!\"> EASTMOSTS FOR THE EASTMOST GOD</div>\n</li> <a href=\"whatever.html\">Testing multiple local links</a>",
+          "published": "2019-07-15T09:00:03.000Z",
+          "author": "",
+          "link": "https://smidgeo.com/bots/godtributes/godtributes-zqkwTPYf.html",
+          "feed": {
+            "source": "http://localhost:3100/godtributes.rss",
+            "link": "https://smidgeo.com/bots/godtributes/",
+            "name": "@godtributes"
+          }
+        },
+        {
+          "title": "No title",
+          "content": "<li class=\"pane\">\n  <div class=\"time-stamp entry-meta\">\n    <a href=\"godtributes-pkpRHGzH.html\">\n      <time datetime=\"2019-07-12T01:00:04.610Z\">2019-7-11 21:00:04</time>\n    </a>\n  </div><div class=\"text-caption\"><img src=\"https://smidgeo.com/bots/godtributes/images/icon.png\" alt=\"GODTRIBUTES!\"> FOULNESS FOR THE FOULNESS FIEND</div>\n</li>",
+          "published": "2019-07-12T01:00:04.000Z",
+          "author": "",
+          "link": "https://smidgeo.com/bots/godtributes/godtributes-pkpRHGzH.html",
+          "feed": {
+            "source": "http://localhost:3100/godtributes.rss",
+            "link": "https://smidgeo.com/bots/godtributes/",
+            "name": "@godtributes"
+          }
+        },
+        {
+          "title": "No title",
+          "content": "<li class=\"pane\">\n  <div class=\"time-stamp entry-meta\">\n    <a href=\"godtributes-LXRfGcQq.html\">\n      <time datetime=\"2019-07-09T09:00:03.583Z\">2019-7-9 05:00:03</time>\n    </a>\n  </div><div class=\"text-caption\"><img src=\"https://smidgeo.com/bots/godtributes/images/icon.png\" alt=\"GODTRIBUTES!\"> PICOFARADS FOR THE PICOFARAD GOD</div>\n</li>",
+          "published": "2019-07-09T09:00:03.000Z",
+          "author": "",
+          "link": "https://smidgeo.com/bots/godtributes/godtributes-LXRfGcQq.html",
+          "feed": {
+            "source": "http://localhost:3100/godtributes.rss",
+            "link": "https://smidgeo.com/bots/godtributes/",
+            "name": "@godtributes"
+          }
+        },
+        {
+          "title": "No title",
+          "content": "<li class=\"pane\">\n  <div class=\"time-stamp entry-meta\">\n    <a href=\"godtributes-LlfVLJuz.html\">\n      <time datetime=\"2019-07-12T09:00:03.807Z\">2019-7-12 05:00:03</time>\n    </a>\n  </div><div class=\"text-caption\"><img src=\"https://smidgeo.com/bots/godtributes/images/icon.png\" alt=\"GODTRIBUTES!\"> CARCINOSARCOMAS FOR THE CARCINOSARCOMA FIEND</div>\n</li>",
+          "published": "2019-07-12T09:00:03.000Z",
+          "author": "",
+          "link": "https://smidgeo.com/bots/godtributes/godtributes-LlfVLJuz.html",
+          "feed": {
+            "source": "http://localhost:3100/godtributes.rss",
+            "link": "https://smidgeo.com/bots/godtributes/",
+            "name": "@godtributes"
+          }
+        },
+        {
+          "title": "No title",
+          "content": "<li class=\"pane\">\n  <div class=\"time-stamp entry-meta\">\n    <a href=\"godtributes-eqEkxymC.html\">\n      <time datetime=\"2019-07-09T17:00:04.598Z\">2019-7-9 13:00:04</time>\n    </a>\n  </div><div class=\"text-caption\"><img src=\"https://smidgeo.com/bots/godtributes/images/icon.png\" alt=\"GODTRIBUTES!\"> CANNELS FOR THE CANNEL GODDESS! DISTRIBUTARIES UNTO THE DISTRIBUTARY COMMITTEE</div>\n</li>",
+          "published": "2019-07-09T17:00:04.000Z",
+          "author": "",
+          "link": "https://smidgeo.com/bots/godtributes/godtributes-eqEkxymC.html",
+          "feed": {
+            "source": "http://localhost:3100/godtributes.rss",
+            "link": "https://smidgeo.com/bots/godtributes/",
+            "name": "@godtributes"
+          }
+        }
+      ],
+      "feedMetadata": {
+        "title": "@godtributes",
+        "link": "https://smidgeo.com/bots/godtributes/"
+      }
+    },
+    {
+      "posts": [],
+      "feedMetadata": {
+        "title": "Colorer Bot",
+        "link": "https://smidgeo.com/bots/colorer/"
+      }
+    }
+  ]
+}

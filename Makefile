@@ -18,4 +18,5 @@ prettier:
 
 test:
 	node tests/sample-rss-tests.js
+	node tests/format-rss-posts-into-html-tests.js
 

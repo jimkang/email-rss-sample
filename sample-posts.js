@@ -42,7 +42,9 @@ function samplePostFromFeed(
     var eligibleArticles = articles.filter(articleIsInDateRange);
     //console.log('eligibleArticles', eligibleArticles);
     var feedPostGroup = {
-      posts: probable.sample(eligibleArticles, sampleSize).sort(comparePublishedDesc)
+      posts: probable
+        .sample(eligibleArticles, sampleSize)
+        .sort(comparePublishedDesc)
     };
     if (articles.length > 0) {
       feedPostGroup.feedMetadata = {
@@ -69,7 +71,7 @@ function samplePostFromFeed(
 }
 
 function comparePublishedDesc(postA, postB) {
-  if (postA.published <  postB.published) {
+  if (postA.published < postB.published) {
     return 1;
   } else {
     return -1;
