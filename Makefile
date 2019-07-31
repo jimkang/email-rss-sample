@@ -37,7 +37,7 @@ build-email: build-html
 		> launch-bay/email.txt
 
 send-email:
-	sendmail < launch-bay/email.txt
+	sendmail $(TO_EMAIL) < launch-bay/email.txt
 
 build-and-send-email: build-email send-email
 
