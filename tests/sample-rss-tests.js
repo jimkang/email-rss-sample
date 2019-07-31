@@ -19,7 +19,7 @@ var testCases = [
       random: seedrandom('one-post-one-day'),
       feedURLs: [`${baseURL}/godtributes.rss`, `${baseURL}/colorer.rss`],
       endDate: new Date('2019-07-25'),
-      startDate: new Date('2019-07-25').getTime() - dayInMS
+      startDate: new Date(new Date('2019-07-25').getTime() - dayInMS)
     },
     expected: {
       feedMetadata: [
@@ -38,7 +38,7 @@ var testCases = [
       random: seedrandom('one-post-one-day-one-feed'),
       feedURLs: [`${baseURL}/godtributes.rss`],
       endDate: new Date('2019-07-25'),
-      startDate: new Date('2019-07-25').getTime() - dayInMS
+      startDate: new Date(new Date('2019-07-25').getTime() - dayInMS)
     },
     expected: {
       feedMetadata: [
@@ -53,7 +53,7 @@ var testCases = [
       random: seedrandom('five-posts-one-day'),
       feedURLs: [`${baseURL}/godtributes.rss`, `${baseURL}/colorer.rss`],
       endDate: new Date('2019-07-25'),
-      startDate: new Date('2019-07-25').getTime() - dayInMS,
+      startDate: new Date(new Date('2019-07-25').getTime() - dayInMS),
       postsPerFeed: 5
     },
     expected: {
@@ -73,7 +73,7 @@ var testCases = [
       random: seedrandom('five-posts-one-week'),
       feedURLs: [`${baseURL}/godtributes.rss`, `${baseURL}/colorer.rss`],
       endDate: new Date('2019-07-16'),
-      startDate: new Date('2019-07-16').getTime() - dayInMS * 7,
+      startDate: new Date(new Date('2019-07-16').getTime() - dayInMS * 7),
       postsPerFeed: 5
     },
     expected: {
