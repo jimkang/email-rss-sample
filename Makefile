@@ -2,7 +2,7 @@ include config.mk
 
 HOMEDIR = $(shell pwd)
 SSHCMD = ssh $(USER)@$(SERVER)
-PROJECTNAME = email-rss-sample 
+PROJECTNAME = email-rss-sample
 APPDIR = /opt/$(PROJECTNAME)
 
 pushall: sync
