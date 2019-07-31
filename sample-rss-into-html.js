@@ -20,10 +20,10 @@ var feedURLs = _;
 
 if (feedURLs.length < 1) {
   console.error(`Usage: node sample-rss-into-html.js \\
-    -endDate 2019-07-30 <optional, defaults to now> \\
-    -numberOfDaysToSample 3 <optional, defaults to 1> \\
-    -postsPerFeed 3 <optional, defaults to 1> \\
-    -styleMarkupFile behavior/custom-style.html <optional, defaults to behavior/default-style.html> \\
+    --endDate 2019-07-30 <optional, defaults to now> \\
+    --numberOfDaysToSample 3 <optional, defaults to 1> \\
+    --postsPerFeed 3 <optional, defaults to 1> \\
+    --styleMarkupFile behavior/custom--style.html <optional, defaults to behavior/default-style.html> \\
     <feed1 URL> <feed2 URL> ... \\
     > email.html`);
   process.exit();
