@@ -41,7 +41,16 @@ function samplePostFromFeed(
     //console.log(articles);
     var eligibleArticles = articles.filter(articleIsInDateRange);
     //console.log('eligibleArticles', eligibleArticles);
-    done(null, probable.sample(eligibleArticles, sampleSize));
+    var feedPostGroup = {
+      posts: probable.sample(eligibleArticles, sampleSize).sort(comparePublishedDesc)
+    };
+    if (articles.length > 0) {
+      feedPostGroup.feedMetadata = {
+        title: articles[0].feed.name,
+        link: articles[0].feed.link
+      };
+    }
+    done(null, feedPostGroup);
   }
 
   function articleIsInDateRange(article) {
@@ -56,6 +65,14 @@ function samplePostFromFeed(
 
     // Don't stop the music.
     done(null, []);
+  }
+}
+
+function comparePublishedDesc(postA, postB) {
+  if (postA.published <  postB.published) {
+    return 1;
+  } else {
+    return -1;
   }
 }
 

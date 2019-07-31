@@ -15,37 +15,77 @@ const dayInMS = 24 * 60 * 60 * 1000;
 var testCases = [
   {
     name: 'Sample one post within the last day for each feed',
-    seed: 'one-post-one-day',
-    feedURLs: [`${baseURL}/godtributes.rss`, `${baseURL}/colorer.rss`],
-    endDate: new Date('2019-07-25'),
-    startDate: new Date('2019-07-25').getTime() - dayInMS,
-    expectedPostCount: [1, 1] // One in each sample feed.
+    opts: {
+      random: seedrandom('one-post-one-day'),
+      feedURLs: [`${baseURL}/godtributes.rss`, `${baseURL}/colorer.rss`],
+      endDate: new Date('2019-07-25'),
+      startDate: new Date('2019-07-25').getTime() - dayInMS
+    },
+    expected: {
+      feedMetadata: [
+        {
+          title: '@godtributes',
+          link: 'https://smidgeo.com/bots/godtributes/'
+        },
+        { title: 'Colorer Bot', link: 'https://smidgeo.com/bots/colorer/' }
+      ],
+      postCount: [1, 1] // One in each sample feed.
+    }
   },
   {
     name: 'Sample one post within the last day for one feed',
-    seed: 'one-post-one-day-one-feed',
-    feedURLs: [`${baseURL}/godtributes.rss`],
-    endDate: new Date('2019-07-25'),
-    startDate: new Date('2019-07-25').getTime() - dayInMS,
-    expectedPostCount: [1] // One sample in one feed.
+    opts: {
+      random: seedrandom('one-post-one-day-one-feed'),
+      feedURLs: [`${baseURL}/godtributes.rss`],
+      endDate: new Date('2019-07-25'),
+      startDate: new Date('2019-07-25').getTime() - dayInMS
+    },
+    expected: {
+      feedMetadata: [
+        { title: '@godtributes', link: 'https://smidgeo.com/bots/godtributes/' }
+      ],
+      postCount: [1] // One sample in one feed.
+    }
   },
   {
     name: 'Sample five posts within the last day for each feed',
-    seed: 'five-posts-one-day',
-    feedURLs: [`${baseURL}/godtributes.rss`, `${baseURL}/colorer.rss`],
-    endDate: new Date('2019-07-25'),
-    startDate: new Date('2019-07-25').getTime() - dayInMS,
-    postsPerFeed: 5,
-    expectedPostCount: [2, 2] // There's actually only two posts in a day.
+    opts: {
+      random: seedrandom('five-posts-one-day'),
+      feedURLs: [`${baseURL}/godtributes.rss`, `${baseURL}/colorer.rss`],
+      endDate: new Date('2019-07-25'),
+      startDate: new Date('2019-07-25').getTime() - dayInMS,
+      postsPerFeed: 5
+    },
+    expected: {
+      feedMetadata: [
+        {
+          title: '@godtributes',
+          link: 'https://smidgeo.com/bots/godtributes/'
+        },
+        { title: 'Colorer Bot', link: 'https://smidgeo.com/bots/colorer/' }
+      ],
+      postCount: [2, 2] // There's actually only two posts in a day.
+    }
   },
   {
     name: 'Sample five posts within a week-long span for each feed',
-    seed: 'five-posts-one-week',
-    feedURLs: [`${baseURL}/godtributes.rss`, `${baseURL}/colorer.rss`],
-    endDate: new Date('2019-07-16'),
-    startDate: new Date('2019-07-16').getTime() - dayInMS * 7,
-    postsPerFeed: 5,
-    expectedPostCount: [5, 0] // There are no Colorer posts in that range.
+    opts: {
+      random: seedrandom('five-posts-one-week'),
+      feedURLs: [`${baseURL}/godtributes.rss`, `${baseURL}/colorer.rss`],
+      endDate: new Date('2019-07-16'),
+      startDate: new Date('2019-07-16').getTime() - dayInMS * 7,
+      postsPerFeed: 5
+    },
+    expected: {
+      feedMetadata: [
+        {
+          title: '@godtributes',
+          link: 'https://smidgeo.com/bots/godtributes/'
+        },
+        { title: 'Colorer Bot', link: 'https://smidgeo.com/bots/colorer/' }
+      ],
+      postCount: [5, 0] // There are no Colorer posts in that range.
+    }
   }
 ];
 
@@ -69,36 +109,33 @@ function runTest(testCase, runDone) {
   test(testCase.name, testSampleRSS);
 
   function testSampleRSS(t) {
-    samplePosts(
-      {
-        random: seedrandom(testCase.seed),
-        feedURLs: testCase.feedURLs,
-        startDate: testCase.startDate,
-        endDate: testCase.endDate,
-        postsPerFeed: testCase.postsPerFeed
-      },
-      checkSample
-    );
+    samplePosts(testCase.opts, checkSample);
 
     function checkSample(error, feedPostGroups) {
       assertNoError(t.ok, error, 'No error when sampling posts.');
       t.equal(
         feedPostGroups.length,
-        testCase.expectedPostCount.length,
+        testCase.expected.postCount.length,
         'Get the correct number of sample feeds.'
       );
       feedPostGroups.forEach(checkFeedPostGroup);
+      //console.log(JSON.stringify(feedPostGroups, null, 2) + '\n.---\n');
       t.end();
       runDone();
     }
 
     function checkFeedPostGroup(feedPostGroup, i) {
+      t.deepEqual(
+        feedPostGroup.feedMetadata,
+        testCase.expected.feedMetadata[i],
+        'Feed metadata is correct.'
+      );
       t.equal(
-        feedPostGroup.length,
-        testCase.expectedPostCount[i],
+        feedPostGroup.posts.length,
+        testCase.expected.postCount[i],
         'Get the correct number of posts in each sample feed.'
       );
-      feedPostGroup.forEach(checkFeedPost);
+      feedPostGroup.posts.forEach(checkFeedPost);
     }
 
     function checkFeedPost(post) {
@@ -108,8 +145,8 @@ function runTest(testCase, runDone) {
         'Post has a published property that is a date.'
       );
       t.ok(
-        post.published > testCase.startDate &&
-          post.published <= testCase.endDate,
+        post.published > testCase.opts.startDate &&
+          post.published <= testCase.opts.endDate,
         'Post published date is in specified range.'
       );
       t.ok(post.link, 'Post has a link.');

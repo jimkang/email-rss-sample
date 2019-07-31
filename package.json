@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "feed-read": "0.0.1",
+    "get-at-path": "^1.0.1",
     "lodash.pluck": "^3.1.2",
     "probable": "^2.1.4",
     "seedrandom": "^3.0.1",
