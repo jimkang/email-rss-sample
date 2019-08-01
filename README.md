@@ -64,6 +64,11 @@ You can also just run parts of the process.
 - `make build-email` to do `build-html` then also generate email text, including headers.
 - `make send-email` to send `launch-bay/email.txt` through `sendmail`.
 
+Tests
+-----
+
+Run tests with `make test`. Some of the tests you require visually inspecting generated HTML files. The test output will tell you what files to look at.
+
 License
 -------
 
