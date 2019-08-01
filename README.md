@@ -3,6 +3,15 @@ email-rss-sample
 
 Grabs several RSS feeds and picks samples from each one from the given time period, then generates an email summary and sends it via sendmail.
 
+Why
+---
+
+I use it to automate creation and sending of a [daily email](https://tinyletter.com/bots) containing recent posts from my [bots](https://smidgeo.com/bots), which are computer processes that generate art in small bits a few times each day.
+
+You can use it to sample and send any RSS content, not just bot-generated content, in an HTML-formatted email.
+
+This is a diagram of my bot email system. The code in this repo does parts 1-4, as well as part 11, if you happen to need something to respond to confirmation request emails automatically.
+
 ![System diagram](meta/bot-email-system.svg)
 
 Installation
