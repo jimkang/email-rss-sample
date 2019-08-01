@@ -67,7 +67,7 @@ OK!
 `;
   log('last-composed-response.txt', replyEmail);
 
-  execFileSync('/usr/sbin/sendmail', [simpleDestEmail], { input: email });
+  execFileSync('/usr/sbin/sendmail', [simpleDestEmail], { input: replyEmail });
 }
 
 function getValueFromLines(lines, fieldName) {
