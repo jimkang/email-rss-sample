@@ -3,6 +3,8 @@ email-rss-sample
 
 Grabs several RSS feeds and picks samples from each one from the given time period, then generates an email summary and sends it via sendmail.
 
+![System diagram](meta/bot-email-system.svg)
+
 Installation
 ------------
 
