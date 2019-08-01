@@ -44,7 +44,7 @@ function respondToEmail() {
       fromValue.includes('jimkang@fastmail.com')
     )
   ) {
-    log('last-bail.txt', 'fromValue did not check out.');
+    log('last-bail.txt', `fromValue ( ${fromValue} ) did not check out.`);
     return;
   }
 
