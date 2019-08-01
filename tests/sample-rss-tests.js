@@ -23,11 +23,11 @@ var testCases = [
     },
     expected: {
       feedMetadata: [
+        { title: 'Colorer Bot', link: 'https://smidgeo.com/bots/colorer/' },
         {
           title: '@godtributes',
           link: 'https://smidgeo.com/bots/godtributes/'
-        },
-        { title: 'Colorer Bot', link: 'https://smidgeo.com/bots/colorer/' }
+        }
       ],
       postCount: [1, 1] // One in each sample feed.
     }
@@ -78,13 +78,13 @@ var testCases = [
     },
     expected: {
       feedMetadata: [
+        { title: 'Colorer Bot', link: 'https://smidgeo.com/bots/colorer/' },
         {
           title: '@godtributes',
           link: 'https://smidgeo.com/bots/godtributes/'
-        },
-        { title: 'Colorer Bot', link: 'https://smidgeo.com/bots/colorer/' }
+        }
       ],
-      postCount: [5, 0] // There are no Colorer posts in that range.
+      postCount: [0, 5] // There are no Colorer posts in that range.
     }
   }
 ];

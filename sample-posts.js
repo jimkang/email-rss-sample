@@ -16,7 +16,7 @@ function samplePosts(
 ) {
   var probable = Probable({ random });
   var q = queue(8);
-  feedURLs.forEach(queueFeedSample);
+  probable.shuffle(feedURLs).forEach(queueFeedSample);
   q.awaitAll(done);
 
   function queueFeedSample(url) {
