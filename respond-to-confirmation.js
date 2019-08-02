@@ -30,6 +30,11 @@ function respondToEmail() {
     [fromValue, toValue, replyToValue, subjectValue].join('\n')
   );
 
+  if (!subjectValue.includes('Your newsletter is ready for sending')) {
+    log('last-bail.txt', 'subjectValue did not check out.');
+    return;
+  }
+
   if (
     !toValue === 'bot@smidgeo.com' &&
     !toValue.includes('<bot@smidgeo.com>')
