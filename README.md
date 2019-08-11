@@ -10,7 +10,7 @@ I use it to automate creation and sending of a [daily email](https://tinyletter.
 
 You can use it to sample and send any RSS content, not just bot-generated content, in an HTML-formatted email.
 
-This is a diagram of my bot email system. The code in this repo does parts 1-4, as well as part 11, if you happen to need something to respond to confirmation request emails automatically.
+This is a diagram of my bot email system. ([Full account of how to set it up here.](https://jimkang.com/weblog/articles/running-your-own-email-server/) The code in this repo does parts 1-4, as well as part 11, if you happen to need something to respond to confirmation request emails automatically.
 
 ![System diagram](meta/bot-email-system.svg)
 
