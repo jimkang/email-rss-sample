@@ -29,6 +29,7 @@ build-html:
 		https://smidgeo.com/bots/hills/rss/index.rss \
 		https://smidgeo.com/bots/dem-bones/rss/index.rss \
 		https://smidgeo.com/bots/fuckingshakespeare/rss/index.rss \
+		https://smidgeo.com/bots/selftaggingbot/rss/index.rss \
 		> launch-bay/email.html
 
 build-email: build-html
