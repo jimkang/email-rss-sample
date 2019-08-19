@@ -34,6 +34,7 @@ This program relies on `sendmail` to actually send the mail. Usually, for `sendm
         build-html:
            node sample-rss-into-html.js \
              --styleMarkupFile behavior/bots-style.html \
+             --numberOfDaysToSample $(DAYSTOSAMPLE) \
              https://smidgeo.com/bots/godtributes/rss/index.rss \
              https://smidgeo.com/bots/colorer/rss/index.rss \
              https://smidgeo.com/bots/autocompletejok/rss/index.rss \
@@ -56,13 +57,15 @@ Usage
 To run the whole sampling, email building, and sending chain, run `make build-and-send-mail`. If you want to run this automatically and periodically, through an entry like this into your cron:
 
     # Daily email at 7 AM
-    0 7 * * * cd <location of this project on your server> && make build-and-send-email
+    0 7 * * * cd <location of this project on your server> && DAYSTOSAMPLE=1 make build-and-send-email
 
 You can also just run parts of the process.
 
-- `make build-html` to sample the RSS and make an HTML file from the posts.
+- `DAYSTOSAMPLE=1 make build-html` to sample the RSS and make an HTML file from the posts.
 - `make build-email` to do `build-html` then also generate email text, including headers.
 - `make send-email` to send `launch-bay/email.txt` through `sendmail`.
+
+Make sure you set the DAYSTOSAMPLE environment variable when using the `build-html` or the `build-and-send-email` targets. You can set it by simply defining it righ before the `make` command. DAYSTOSAMPLE tells it how many days of posts it should sample from. If you set it to 7, for example, it will pick from the past seven days of posts from each feed.
 
 Tests
 -----

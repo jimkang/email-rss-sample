@@ -23,6 +23,7 @@ test:
 build-html:
 	node sample-rss-into-html.js \
 		--styleMarkupFile behavior/bots-style.html \
+		--numberOfDaysToSample $(DAYSTOSAMPLE) \
 		https://smidgeo.com/bots/godtributes/rss/index.rss \
 		https://smidgeo.com/bots/colorer/rss/index.rss \
 		https://smidgeo.com/bots/autocompletejok/rss/index.rss \
