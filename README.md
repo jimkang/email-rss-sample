@@ -10,7 +10,7 @@ I use it to automate creation and sending of a [daily email](https://tinyletter.
 
 You can use it to sample and send any RSS content, not just bot-generated content, in an HTML-formatted email.
 
-This is a diagram of my bot email system. The code in this repo does parts 1-4, as well as part 11, if you happen to need something to respond to confirmation request emails automatically.
+This is a diagram of my bot email system. ([Full account of how to set it up here.](https://jimkang.com/weblog/articles/running-your-own-email-server/)) The code in this repo does parts 1-4, as well as part 11, if you happen to need something to respond to confirmation request emails automatically.
 
 ![System diagram](meta/bot-email-system.svg)
 
@@ -18,53 +18,63 @@ Installation
 ------------
 
 - Clone this repo.
-- Optionally, create a config.js file containing posting target configs that look like the [post-it targets array](https://github.com/jimkang/post-it#usage).
-- Optionally, schedule it to run via cron.
+- Create a `config.mk` in the project root directory. Fill out the following fields in it:
+
+        USER = <The Unix user you want to use to deploy to your server. You can skip this if you're not going to deploy.>
+        SERVER = <The server you want to deploy this to. Skip if you're not going to deploy it anywhere else.
+        TO_EMAIL = <The email address that you want the generated emails to go to.>
+        FROM_EMAIL = <The email address that goes in the From: field.>
+
+- Set up an MTA if you haven't already.
+
+This program relies on `sendmail` to actually send the mail. Usually, for `sendmail` to work, you need to have set up a mail transfer agent (MTA) on the machine that accepts mail from sendmail and relays it to other mail servers. I used the postfix MTA because it comes pre-installed on Ubuntu. [Here's my notes on setting it up.](https://github.com/jimkang/knowledge/blob/master/email.md#setting-up-the-mta) It took me hours; hopefully, you have better luck! 
+
+- Edit the `build-html` target in the `Makefile` (TODO: Make these variables in config.mk) so that it lists the RSS feeds you want to sample instead of these:
+
+        build-html:
+           node sample-rss-into-html.js \
+             --styleMarkupFile behavior/bots-style.html \
+             https://smidgeo.com/bots/godtributes/rss/index.rss \
+             https://smidgeo.com/bots/colorer/rss/index.rss \
+             https://smidgeo.com/bots/autocompletejok/rss/index.rss \
+             https://smidgeo.com/bots/hills/rss/index.rss \
+             https://smidgeo.com/bots/dem-bones/rss/index.rss \
+             https://smidgeo.com/bots/fuckingshakespeare/rss/index.rss \
+              > launch-bay/email.html
+
+- Point the `--styleMarkupFile` param to a file containing the CSS you want to be used to style the email contents. You can start with `behavior/default-style.html` and edit it or make copy of it, edit that, then point `--styleMarkupFile` at that. (You can iteratively check out your changes to the style file by running `make build-html` and then looking at `launch-bay/email.html`.
+
+- If you need an autoresponder (in my case, when this program sent an email to a mailing list, the mailing list replied with an email asking to confirm that it really wanted to send the email to the mailing list), edit the user's `.forward` file to forward mail to the responder program:
+
+        \<username that the program runs as>, "|<location of this project on your server>/respond-to-confirmation.js"
+
+Then, edit the to: and from: values that `respond-to-confirmation.js` checks for. (It avoids responding to things not addressed to it and from a particular address.)
 
 Usage
 -----
 
-    node email-rss-sample.js <static-web-archive root directory>
+To run the whole sampling, email building, and sending chain, run `make build-and-send-mail`. If you want to run this automatically and periodically, through an entry like this into your cron:
 
-Output:
+    # Daily email at 7 AM
+    0 7 * * * cd <location of this project on your server> && make build-and-send-email
 
-    TODO
-    { term: 'good', count: 2, countsInRefs: { b: 2 }, refs: ['b'] }
-    { term: 'button', count: 1, countsInRefs: { a: 1 }, refs: ['a'] }
-    [
-      { term: 'the', count: 4, countsInRefs: { a: 2, b: 2 }, refs: ['a', 'b'] },
-      {
-        term: 'delightful',
-        count: 3,
-        countsInRefs: { a: 1, b: 2 },
-        refs: ['a', 'b']
-      },
-      { term: 'hit', count: 3, countsInRefs: { a: 2, b: 1 }, refs: ['a', 'b'] },
-      {
-        term: 'blaster',
-        count: 2,
-        countsInRefs: { a: 1, b: 1 },
-        refs: ['a', 'b']
-      },
-      { term: 'it', count: 2, countsInRefs: { a: 1, b: 1 }, refs: ['a', 'b'] },
-      {
-        term: 'like',
-        count: 2,
-        countsInRefs: { b: 1, c: 1 },
-        refs: ['b', 'c']
-      },
-      { term: 'good', count: 2, countsInRefs: { b: 2 }, refs: ['b'] },
-      { term: 'really', count: 2, countsInRefs: { a: 2 }, refs: ['a'] },
-      { term: 'state', count: 2, countsInRefs: { b: 2 }, refs: ['b'] },
-      { term: 'know', count: 2, countsInRefs: { a: 2 }, refs: ['a'] }
-    ]
-    
+You can also just run parts of the process.
+
+- `make build-html` to sample the RSS and make an HTML file from the posts.
+- `make build-email` to do `build-html` then also generate email text, including headers.
+- `make send-email` to send `launch-bay/email.txt` through `sendmail`.
+
+Tests
+-----
+
+Run tests with `make test`. Some of the tests you require visually inspecting generated HTML files. The test output will tell you what files to look at.
+
 License
 -------
 
 The MIT License (MIT)
 
-Copyright (c) 2018 Jim Kang
+Copyright (c) 2019 Jim Kang
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the 'Software'), to deal
