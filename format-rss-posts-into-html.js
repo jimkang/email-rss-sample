@@ -1,4 +1,4 @@
-var linkAttributeContextRegex = /href="(.*)"/g;
+var linkAttributeContextRegex = /href="(.*?)"/g;
 const regexPrefixLength = 'href="'.length;
 
 var { URL } = require('url');
