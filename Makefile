@@ -32,8 +32,10 @@ build-html:
 		https://smidgeo.com/bots/fuckingshakespeare/rss/index.rss \
 		https://smidgeo.com/bots/selftaggingbot/rss/index.rss \
 		> launch-bay/email.html
+
 # https://smidgeo.com/bots/spinners/rss/index.rss \
 build-email: build-html
+
 	node html-into-email.js \
 		--to $(TO_EMAIL) \
 		--from $(FROM_EMAIL) \
