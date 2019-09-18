@@ -35,6 +35,7 @@ build-html:
 		> launch-bay/email.html
 
 build-email: build-html
+
 	node html-into-email.js \
 		--to $(TO_EMAIL) \
 		--from $(FROM_EMAIL) \
