@@ -38,7 +38,7 @@ function formatSubject(subject) {
   if (subject && subject.includes('\n')) {
     // UNLESS it is a knock-knock joke.
     let lines = subject.split('\n');
-    console.error('lines', lines);
+    //console.error('lines', lines);
     if (multilineStarts.includes(lines[0])) {
       formatted = lines
         .slice(0, 3)
