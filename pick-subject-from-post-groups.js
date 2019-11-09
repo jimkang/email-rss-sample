@@ -35,7 +35,7 @@ function formatSubject(subject) {
   var formatted = subject;
   // Include only one line if there are multiple lines
   // and only one part of the line if it is separated by |.
-  if (subject.includes('\n')) {
+  if (subject && subject.includes('\n')) {
     // UNLESS it is a knock-knock joke.
     let lines = subject.split('\n');
     console.error('lines', lines);
@@ -48,7 +48,7 @@ function formatSubject(subject) {
       formatted = lines[0];
     }
   }
-  if (formatted.includes('|')) {
+  if (formatted && formatted.includes('|')) {
     formatted = subject.split('|')[0];
   }
   return formatted + postfix;
