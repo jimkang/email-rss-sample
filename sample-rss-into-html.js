@@ -4,6 +4,7 @@ var samplePosts = require('./sample-posts');
 var minimist = require('minimist');
 var formatRSSPostsIntoHTML = require('./format-rss-posts-into-html');
 var fs = require('fs');
+var PickSubjectFromPostGroups = require('./pick-subject-from-post-groups');
 
 var sb = require('standard-bail')();
 
@@ -64,7 +65,14 @@ function makeHTML(feedPostGroups) {
   const styleMarkup = fs.readFileSync(__dirname + '/' + styleMarkupFile, {
     encoding: 'utf8'
   });
-  console.log(formatRSSPostsIntoHTML({ feedPostGroups, styleMarkup }));
+  console.log(
+    formatRSSPostsIntoHTML({
+      feedPostGroups,
+      styleMarkup,
+
+      pickSubject: PickSubjectFromPostGroups(Math.random)
+    })
+  );
 }
 
 function handleError(error) {

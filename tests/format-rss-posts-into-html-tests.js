@@ -4,6 +4,7 @@ var test = require('tape');
 var formatRSSPostsIntoHTML = require('../format-rss-posts-into-html');
 var fs = require('fs');
 var feedPostGroupExamples = require('./fixtures/feed-post-groups');
+var PickSubjectFromPostGroups = require('../pick-subject-from-post-groups');
 
 const styleMarkup = fs.readFileSync(
   __dirname + '/../behavior/default-style.html',
@@ -45,6 +46,20 @@ var testCases = [
       styleMarkup
     },
     expected: '' //HTML string goes here.
+  },
+  {
+    name: 'Use a post as the email subject',
+    opts: {
+      feedPostGroups: feedPostGroupExamples['two-posts-from-two-feeds'],
+      styleMarkup,
+      pickSubject: PickSubjectFromPostGroups()
+    },
+    htmlChecker(t, html) {
+      t.ok(
+        html.includes('<!--<SUBJECT>'),
+        'HTML has the SUBJECT comment in it.'
+      );
+    }
   }
 ];
 
@@ -65,6 +80,9 @@ function runTest(testCase) {
     console.log(
       `Wrote out file://${filename} for visual inspection. Make sure it is OK.`
     );
+    if (testCase.htmlChecker) {
+      testCase.htmlChecker(t, html);
+    }
 
     t.end();
   }

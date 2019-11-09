@@ -4,8 +4,14 @@ const regexPrefixLength = 'href="'.length;
 var { URL } = require('url');
 var getAtPath = require('get-at-path');
 
-function formatRSSPostsIntoHTML({ feedPostGroups, styleMarkup }) {
-  return feedPostGroups.map(formatFeedPostGroup).join('\n');
+function formatRSSPostsIntoHTML({ feedPostGroups, styleMarkup, pickSubject }) {
+  var formattedGroups = feedPostGroups.map(formatFeedPostGroup);
+  var html = '';
+  if (pickSubject) {
+    html += `<!--<SUBJECT>${pickSubject(feedPostGroups)}</SUBJECT>-->\n`;
+  }
+  html += formattedGroups.join('\n');
+  return html;
 
   function formatFeedPostGroup(feedPostGroup) {
     const postGroupClass = feedPostGroup.feedMetadata.title
