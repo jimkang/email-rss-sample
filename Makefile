@@ -35,6 +35,7 @@ build-html:
 		https://smidgeo.com/bots/land-of-contrasts/rss/index.rss \
 		https://smidgeo.com/bots/successfulbot/rss/index.rss \
 		https://smidgeo.com/bots/eyes-bot/rss/index.rss \
+		https://smidgeo.com/bots/slopcube/rss/index.rss \
 		> launch-bay/email.html
 
 build-email: build-html
