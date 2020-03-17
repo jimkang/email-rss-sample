@@ -33,7 +33,7 @@
     "lodash.compact": "^3.0.1",
     "lodash.flatten": "^4.4.0",
     "lodash.pluck": "^3.1.2",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.2",
     "probable": "^2.1.4",
     "sanitize-html": "^1.20.1",
     "seedrandom": "^3.0.1",
