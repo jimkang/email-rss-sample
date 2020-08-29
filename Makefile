@@ -24,18 +24,9 @@ build-html:
 	node sample-rss-into-html.js \
 		--styleMarkupFile behavior/bots-style.html \
 		--numberOfDaysToSample $(DAYSTOSAMPLE) \
-		https://smidgeo.com/bots/godtributes/rss/index.rss \
-		https://smidgeo.com/bots/colorer/rss/index.rss \
-		https://smidgeo.com/bots/autocompletejok/rss/index.rss \
-		https://smidgeo.com/bots/hills/rss/index.rss \
-		https://smidgeo.com/bots/dem-bones/rss/index.rss \
-		https://smidgeo.com/bots/fuckingshakespeare/rss/index.rss \
-		https://smidgeo.com/bots/selftaggingbot/rss/index.rss \
-		https://smidgeo.com/bots/spinners/rss/index.rss \
-		https://smidgeo.com/bots/land-of-contrasts/rss/index.rss \
-		https://smidgeo.com/bots/successfulbot/rss/index.rss \
-		https://smidgeo.com/bots/eyes-bot/rss/index.rss \
-		https://smidgeo.com/bots/slopcube/rss/index.rss \
+    --postsPerFeed 8 \
+    --showFeedTitles false \
+		https://theoldreader.com/profile/jimkang.rss \
 		> launch-bay/email.html
 
 build-email: build-html
@@ -49,4 +40,3 @@ send-email:
 	sendmail $(TO_EMAIL) < launch-bay/email.txt
 
 build-and-send-email: build-email send-email
-

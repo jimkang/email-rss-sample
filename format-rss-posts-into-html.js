@@ -4,7 +4,12 @@ const regexPrefixLength = 'href="'.length;
 var { URL } = require('url');
 var getAtPath = require('get-at-path');
 
-function formatRSSPostsIntoHTML({ feedPostGroups, styleMarkup, pickSubject }) {
+function formatRSSPostsIntoHTML({
+  feedPostGroups,
+  styleMarkup,
+  pickSubject,
+  showFeedTitles = true
+}) {
   var formattedGroups = feedPostGroups.map(formatFeedPostGroup);
   var html = '';
   if (pickSubject) {
@@ -19,9 +24,14 @@ function formatRSSPostsIntoHTML({ feedPostGroups, styleMarkup, pickSubject }) {
       .replace(/@/g, '')
       .toLowerCase();
 
+    var feedTitle = '';
+    if (showFeedTitles) {
+      feedTitle = `<h3 class="feed-title">${feedPostGroup.feedMetadata.title}</h3>`;
+    }
+
     return `${styleMarkup}
 <div class="feed-post-group ${postGroupClass}">
-  <h3 class="feed-title">${feedPostGroup.feedMetadata.title}</h3>
+  ${feedTitle}
   <ul class="feed-posts">
     ${feedPostGroup.posts.map(formatPost).join('\n')}
   </ul>

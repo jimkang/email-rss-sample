@@ -60,6 +60,21 @@ var testCases = [
         'HTML has the SUBJECT comment in it.'
       );
     }
+  },
+  {
+    name: 'Hide feed titles',
+    opts: {
+      feedPostGroups: feedPostGroupExamples['two-posts-from-two-feeds'],
+      styleMarkup,
+      pickSubject: PickSubjectFromPostGroups(),
+      showFeedTitles: false
+    },
+    htmlChecker(t, html) {
+      t.ok(
+        !html.includes('<h3 class="feed-title">'),
+        'HTML does not contain feed title'
+      );
+    }
   }
 ];
 

@@ -15,16 +15,17 @@ var {
   numberOfDaysToSample,
   postsPerFeed,
   styleMarkupFile,
+  showFeedTitles,
   _
 } = minimist(process.argv.slice(2));
 var feedURLs = _;
-
 if (feedURLs.length < 1) {
   console.error(`Usage: node sample-rss-into-html.js \\
     --endDate 2019-07-30 <optional, defaults to now> \\
     --numberOfDaysToSample 3 <optional, defaults to 1> \\
     --postsPerFeed 3 <optional, defaults to 1> \\
     --styleMarkupFile behavior/custom--style.html <optional, defaults to behavior/default-style.html> \\
+    --showFeedTitles <optional, defaults to false> \\
     <feed1 URL> <feed2 URL> ... \\
     > email.html`);
   process.exit();
@@ -50,6 +51,12 @@ if (!styleMarkupFile) {
   styleMarkupFile = 'behavior/default-style.html';
 }
 
+if (showFeedTitles) {
+  if (showFeedTitles === 'false') {
+    showFeedTitles = false;
+  }
+}
+
 samplePosts(
   {
     random: Math.random,
@@ -69,7 +76,7 @@ function makeHTML(feedPostGroups) {
     formatRSSPostsIntoHTML({
       feedPostGroups,
       styleMarkup,
-
+      showFeedTitles,
       pickSubject: PickSubjectFromPostGroups(Math.random)
     })
   );
