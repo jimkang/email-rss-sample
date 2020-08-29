@@ -45,8 +45,9 @@ Subject: ${subject}
 Content-Type: text/html; charset="utf8"
 ${unsubscribeHeader}
 
+<html>
 ${bodyHTML}
-
+</html>
 `;
 
 console.log(emailText);
