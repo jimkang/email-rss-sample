@@ -26,6 +26,8 @@ build-html:
 		--numberOfDaysToSample $(DAYSTOSAMPLE) \
     --postsPerFeed 8 \
     --showFeedTitles false \
+    --addLinksToPosts true \
+    --urlPrefixToLinkTitleFile behavior/url-prefixes-for-link-titles.json \
 		https://theoldreader.com/profile/jimkang.rss \
 		> launch-bay/email.html
 

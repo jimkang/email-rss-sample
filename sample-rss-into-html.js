@@ -16,6 +16,8 @@ var {
   postsPerFeed,
   styleMarkupFile,
   showFeedTitles,
+  addLinksToPosts,
+  urlPrefixToLinkTitleFile,
   _
 } = minimist(process.argv.slice(2));
 var feedURLs = _;
@@ -26,6 +28,8 @@ if (feedURLs.length < 1) {
     --postsPerFeed 3 <optional, defaults to 1> \\
     --styleMarkupFile behavior/custom--style.html <optional, defaults to behavior/default-style.html> \\
     --showFeedTitles <optional, defaults to false> \\
+    --addLinksToPosts <optional, defaults to false> \\
+    --urlPrefixToLinkTitleFile <optional, path to JSON file> \\
     <feed1 URL> <feed2 URL> ... \\
     > email.html`);
   process.exit();
@@ -57,6 +61,21 @@ if (showFeedTitles) {
   }
 }
 
+if (addLinksToPosts) {
+  if (addLinksToPosts === 'false') {
+    addLinksToPosts = false;
+  }
+}
+
+var urlPrefixesToLinkTitles;
+if (urlPrefixToLinkTitleFile) {
+  urlPrefixesToLinkTitles = JSON.parse(
+    fs.readFileSync(__dirname + '/' + urlPrefixToLinkTitleFile, {
+      encoding: 'utf8'
+    })
+  );
+}
+
 samplePosts(
   {
     random: Math.random,
@@ -77,11 +96,24 @@ function makeHTML(feedPostGroups) {
       feedPostGroups,
       styleMarkup,
       showFeedTitles,
-      pickSubject: PickSubjectFromPostGroups(Math.random)
+      addLinksToPosts,
+      pickSubject: PickSubjectFromPostGroups(Math.random),
+      linkTitleAliasFn: urlPrefixesToLinkTitles
+        ? getLinkTitleForPost
+        : undefined
     })
   );
 }
 
 function handleError(error) {
   console.error(error, error.stack);
+}
+
+// Receives a post object.
+function getLinkTitleForPost({ link }) {
+  for (var urlPrefix in urlPrefixesToLinkTitles) {
+    if (link.startsWith(urlPrefix)) {
+      return urlPrefixesToLinkTitles[urlPrefix];
+    }
+  }
 }

@@ -1,14 +1,15 @@
 var linkAttributeContextRegex = /href="(.*?)"/g;
 const regexPrefixLength = 'href="'.length;
 
-var { URL } = require('url');
-var getAtPath = require('get-at-path');
+var path = require('path');
 
 function formatRSSPostsIntoHTML({
   feedPostGroups,
   styleMarkup,
   pickSubject,
-  showFeedTitles = true
+  showFeedTitles = true,
+  addLinksToPosts = false,
+  linkTitleAliasFn
 }) {
   var formattedGroups = feedPostGroups.map(formatFeedPostGroup);
   var html = '';
@@ -32,9 +33,9 @@ function formatRSSPostsIntoHTML({
     return `${styleMarkup}
 <div class="feed-post-group ${postGroupClass}">
   ${feedTitle}
-  <ul class="feed-posts">
+  <section class="feed-posts">
     ${feedPostGroup.posts.map(formatPost).join('\n')}
-  </ul>
+  </section>
 </div>`;
 
     function formatPost(post) {
@@ -47,18 +48,23 @@ function formatRSSPostsIntoHTML({
       linkContexts.sort(compareLinkContextIndexesDesc);
 
       linkContexts.forEach(replaceWithAbsoluteURLInContent);
-      return content;
+      var postHTML = `<div class="post-enclosure">${content}</div>`;
+      if (addLinksToPosts) {
+        let linkTitle = feedPostGroup.feedMetadata.title;
+        if (linkTitleAliasFn) {
+          linkTitle = linkTitleAliasFn(post);
+        }
+        const linkToPost = `<a href="${post.link}" class="link-to-post"><h3>${linkTitle}</h3></a>`;
+        postHTML = `<div class="post-enclosure">${linkToPost}\n${content}\n</div>`;
+      }
+      return postHTML;
 
       function replaceWithAbsoluteURLInContent(localLinkContext) {
         const localURL = localLinkContext[1];
         // URL will figure out if localURL is actually local or not,
-        // then append the base (feedMetadata) to it if necessary.
-        var link = getAtPath(feedPostGroup, ['feedMetadata', 'link']);
-        if (!localURL || !link) {
-          return;
-        }
-
-        var url = new URL(localURL, link);
+        // then append the base to it if necessary.
+        const base = path.parse(post.link).dir + '/';
+        var url = new URL(localURL, base);
         const replaceStart = regexPrefixLength + localLinkContext.index;
         content =
           content.slice(0, replaceStart) +

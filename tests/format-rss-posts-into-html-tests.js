@@ -75,6 +75,39 @@ var testCases = [
         'HTML does not contain feed title'
       );
     }
+  },
+  {
+    name: 'Add links to posts',
+    opts: {
+      feedPostGroups: feedPostGroupExamples['two-posts-from-two-feeds'],
+      styleMarkup,
+      pickSubject: PickSubjectFromPostGroups(),
+      addLinksToPosts: true
+    },
+    htmlChecker(t, html) {
+      t.ok(
+        html.includes('class="link-to-post"'),
+        'HTML does contain links to posts'
+      );
+    }
+  },
+  {
+    name: 'Alias link titles',
+    opts: {
+      feedPostGroups: feedPostGroupExamples['two-posts-from-two-feeds'],
+      styleMarkup,
+      pickSubject: PickSubjectFromPostGroups(),
+      addLinksToPosts: true,
+      linkTitleAliasFn() {
+        return 'fhqwhgads';
+      }
+    },
+    htmlChecker(t, html) {
+      t.ok(
+        html.includes('class="link-to-post"><h3>fhqwhgads</h3></a>'),
+        'Link title comes from aliasing function'
+      );
+    }
   }
 ];
 
