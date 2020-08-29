@@ -35,6 +35,7 @@ build-email: build-html
 	node html-into-email.js \
 		--to $(TO_EMAIL) \
 		--from $(FROM_EMAIL) \
+		--unsubscribeEmail $(UNSUB_EMAIL) \
 		--htmlFile launch-bay/email.html \
 		> launch-bay/email.txt
 
