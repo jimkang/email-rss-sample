@@ -40,6 +40,7 @@ build-email: build-html
 		> launch-bay/email.txt
 
 send-email:
-	sendmail $(TO_EMAIL) < launch-bay/email.txt
+	./send-to-list.sh launch-bay/email.txt behavior/list.txt
+	#sendmail $(TO_EMAIL) < launch-bay/email.txt
 
 build-and-send-email: build-email send-email
