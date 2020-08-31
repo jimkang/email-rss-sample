@@ -27,6 +27,7 @@ build-html:
     --postsPerFeed 8 \
     --showFeedTitles false \
     --addLinksToPosts true \
+    --enclosureTag ul \
     --urlPrefixToLinkTitleFile behavior/url-prefixes-for-link-titles.json \
 		https://theoldreader.com/profile/jimkang.rss \
 		> launch-bay/email.html

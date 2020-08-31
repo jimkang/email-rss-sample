@@ -9,6 +9,7 @@ function formatRSSPostsIntoHTML({
   pickSubject,
   showFeedTitles = true,
   addLinksToPosts = false,
+  enclosureTag = 'div',
   linkTitleAliasFn
 }) {
   var formattedGroups = feedPostGroups.map(formatFeedPostGroup);
@@ -48,14 +49,14 @@ function formatRSSPostsIntoHTML({
       linkContexts.sort(compareLinkContextIndexesDesc);
 
       linkContexts.forEach(replaceWithAbsoluteURLInContent);
-      var postHTML = `<div class="post-enclosure">${content}</div>`;
+      var postHTML = `<${enclosureTag} class="post-enclosure">${content}</${enclosureTag}>`;
       if (addLinksToPosts) {
         let linkTitle = feedPostGroup.feedMetadata.title;
         if (linkTitleAliasFn) {
           linkTitle = linkTitleAliasFn(post);
         }
         const linkToPost = `<a href="${post.link}" class="link-to-post"><h3>${linkTitle}</h3></a>`;
-        postHTML = `<div class="post-enclosure">${linkToPost}\n${content}\n</div>`;
+        postHTML = `<${enclosureTag} class="post-enclosure">${linkToPost}\n${content}\n</${enclosureTag}>`;
       }
       return postHTML;
 

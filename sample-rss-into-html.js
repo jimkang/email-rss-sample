@@ -18,6 +18,7 @@ var {
   showFeedTitles,
   addLinksToPosts,
   urlPrefixToLinkTitleFile,
+  enclosureTag,
   _
 } = minimist(process.argv.slice(2));
 var feedURLs = _;
@@ -30,6 +31,7 @@ if (feedURLs.length < 1) {
     --showFeedTitles <optional, defaults to false> \\
     --addLinksToPosts <optional, defaults to false> \\
     --urlPrefixToLinkTitleFile <optional, path to JSON file> \\
+    --enclosureTag <optional, defaults to 'div'> \\
     <feed1 URL> <feed2 URL> ... \\
     > email.html`);
   process.exit();
@@ -97,6 +99,7 @@ function makeHTML(feedPostGroups) {
       styleMarkup,
       showFeedTitles,
       addLinksToPosts,
+      enclosureTag,
       pickSubject: PickSubjectFromPostGroups(Math.random),
       linkTitleAliasFn: urlPrefixesToLinkTitles
         ? getLinkTitleForPost
