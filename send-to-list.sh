@@ -2,6 +2,7 @@
 
 emailtextfile=$1
 listfile=$2
+tmpfile=launch-bay/tmp.txt
 
 if [[ ! $emailtextfile ]] || [[ ! $listfile ]]; then
   printf "Usage: ./send-to-list.sh <text file containing message text> <text file containing recipients>\n";
@@ -9,5 +10,6 @@ if [[ ! $emailtextfile ]] || [[ ! $listfile ]]; then
 fi
 
 while read -r address
-    do sendmail "$address" < "$emailtextfile"
+    do printf "To: %s\n" "${address}" | cat - "$emailtextfile" > "$tmpfile" &&\
+    sendmail "$address" < "$tmpfile"
 done < "$listfile"
