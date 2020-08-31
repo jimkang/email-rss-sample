@@ -1,7 +1,7 @@
+var path = require('path');
+
 var linkAttributeContextRegex = /href="(.*?)"/g;
 const regexPrefixLength = 'href="'.length;
-
-var path = require('path');
 
 function formatRSSPostsIntoHTML({
   feedPostGroups,
@@ -10,13 +10,20 @@ function formatRSSPostsIntoHTML({
   showFeedTitles = true,
   addLinksToPosts = false,
   enclosureTag = 'div',
+  introText,
   linkTitleAliasFn
 }) {
   var formattedGroups = feedPostGroups.map(formatFeedPostGroup);
   var html = '';
+
   if (pickSubject) {
     html += `<!--<SUBJECT>${pickSubject(feedPostGroups)}</SUBJECT>-->\n`;
   }
+
+  if (introText) {
+    html += introText;
+  }
+
   html += formattedGroups.join('\n');
   return html;
 

@@ -19,6 +19,7 @@ var {
   addLinksToPosts,
   urlPrefixToLinkTitleFile,
   enclosureTag,
+  introTextFile,
   _
 } = minimist(process.argv.slice(2));
 var feedURLs = _;
@@ -32,6 +33,7 @@ if (feedURLs.length < 1) {
     --addLinksToPosts <optional, defaults to false> \\
     --urlPrefixToLinkTitleFile <optional, path to JSON file> \\
     --enclosureTag <optional, defaults to 'div'> \\
+    --introTextFile <optional> \\
     <feed1 URL> <feed2 URL> ... \\
     > email.html`);
   process.exit();
@@ -78,6 +80,11 @@ if (urlPrefixToLinkTitleFile) {
   );
 }
 
+let introText;
+if (introTextFile) {
+  introText = fs.readFileSync(introTextFile, { encoding: 'utf8' });
+}
+
 samplePosts(
   {
     random: Math.random,
@@ -100,6 +107,7 @@ function makeHTML(feedPostGroups) {
       showFeedTitles,
       addLinksToPosts,
       enclosureTag,
+      introText,
       pickSubject: PickSubjectFromPostGroups(Math.random),
       linkTitleAliasFn: urlPrefixesToLinkTitles
         ? getLinkTitleForPost

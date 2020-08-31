@@ -28,6 +28,7 @@ build-html:
     --showFeedTitles false \
     --addLinksToPosts true \
     --enclosureTag ul \
+    --introTextFile behavior/welcome-back-message.html \
     --urlPrefixToLinkTitleFile behavior/url-prefixes-for-link-titles.json \
 		https://theoldreader.com/profile/jimkang.rss \
 		> launch-bay/email.html
