@@ -1,9 +1,12 @@
 /* global __dirname, process */
 
-var subjectRegex = /<SUBJECT>(.*)<\/SUBJECT>/;
-
 var minimist = require('minimist');
 var fs = require('fs');
+var sanitizeHTML = require('sanitize-html');
+
+var subjectRegex = /<SUBJECT>(.*)<\/SUBJECT>/;
+
+const multipartBoundary = ':.:.:.:.:.:.:.:.:.:.:';
 
 var { htmlFile, from, unsubscribeEmail, subject } = minimist(
   process.argv.slice(2)
@@ -38,14 +41,25 @@ if (unsubscribeEmail) {
   unsubscribeHeader = `List-Unsubscribe: "<mailto:${unsubscribeEmail}>"`;
 }
 
+const plainTextBody = sanitizeHTML(bodyHTML, { allowedTags: [] }).trim();
+
 const emailText = `From: ${from}
 Subject: ${subject}
-Content-Type: text/html; charset="utf8"
+MIME-Version: 1.0
+Content-Type: multipart/alternative;boundary=${multipartBoundary}
 ${unsubscribeHeader}
+
+${plainTextBody}
+
+${multipartBoundary}
+
+Content-Type: text/html; charset="utf8"
 
 <html>
 ${bodyHTML}
 </html>
+
+${multipartBoundary}
 `;
 
 console.log(emailText);

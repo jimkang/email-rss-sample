@@ -9,7 +9,13 @@ if [[ ! $emailtextfile ]] || [[ ! $listfile ]]; then
   exit 1;
 fi
 
+#echo "shell: $SHELL"
+#echo "path: $PATH"
+
+#catfile=$(which cat)
+#echo "Cat file: $catfile"
+#exit 1
+
 while read -r address
-    do printf "To: %s\n" "${address}" | cat - "$emailtextfile" > "$tmpfile" &&\
-    sendmail "$address" < "$tmpfile"
+  do printf "To: %s\n" "${address}" | cat - "$emailtextfile" > "$tmpfile" && sendmail "$address" < "$tmpfile"
 done < "$listfile"
