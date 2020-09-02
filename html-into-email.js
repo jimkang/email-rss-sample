@@ -45,21 +45,22 @@ const plainTextBody = sanitizeHTML(bodyHTML, { allowedTags: [] }).trim();
 
 const emailText = `From: ${from}
 Subject: ${subject}
-MIME-Version: 1.0
-Content-Type: multipart/alternative;boundary=${multipartBoundary}
 ${unsubscribeHeader}
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="${multipartBoundary}"
+
+--${multipartBoundary}
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
 ${plainTextBody}
 
-${multipartBoundary}
+--${multipartBoundary}
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Content-Type: text/html; charset="utf8"
-
-<html>
 ${bodyHTML}
-</html>
 
-${multipartBoundary}
-`;
+--${multipartBoundary}--`;
 
 console.log(emailText);

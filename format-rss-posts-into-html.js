@@ -38,13 +38,20 @@ function formatRSSPostsIntoHTML({
       feedTitle = `<h3 class="feed-title">${feedPostGroup.feedMetadata.title}</h3>`;
     }
 
-    return `${styleMarkup}
+    return `<!DOCTYPE html>
+<html>
+<head>
+  ${styleMarkup}
+</head>
+<body>
 <div class="feed-post-group ${postGroupClass}">
   ${feedTitle}
   <section class="feed-posts">
     ${feedPostGroup.posts.map(formatPost).join('\n')}
   </section>
-</div>`;
+</div>
+</body>
+</html>`;
 
     function formatPost(post) {
       var linkContexts = [];
