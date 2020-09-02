@@ -29,10 +29,12 @@ build-html:
     --showFeedTitles false \
     --addLinksToPosts true \
     --enclosureTag ul \
-    --introTextFile behavior/welcome-back-message.html \
     --urlPrefixToLinkTitleFile behavior/url-prefixes-for-link-titles.json \
 		https://theoldreader.com/profile/jimkang.rss \
 		> launch-bay/email.html
+
+# TODO: Generate an intro every email
+    #--introTextFile behavior/welcome-back-message.html \
 
 build-email: build-html
 	node html-into-email.js \
