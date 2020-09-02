@@ -1,8 +1,9 @@
-/* global __dirname, process */
+/* global __dirname, process, Buffer */
 
 var minimist = require('minimist');
 var fs = require('fs');
 var sanitizeHTML = require('sanitize-html');
+var qp = require('@ronomon/quoted-printable');
 
 var subjectRegex = /<SUBJECT>(.*)<\/SUBJECT>/;
 
@@ -25,6 +26,7 @@ if (!htmlFile || !from) {
 const bodyHTML = fs.readFileSync(__dirname + '/' + htmlFile, {
   encoding: 'utf8'
 });
+const encodedBodyHTML = qp.encode(Buffer.from(bodyHTML, 'utf8'));
 
 if (!subject) {
   let match = bodyHTML.match(subjectRegex);
@@ -42,7 +44,6 @@ if (unsubscribeEmail) {
 }
 
 const plainTextBody = sanitizeHTML(bodyHTML, { allowedTags: [] }).trim();
-
 const emailText = `From: ${from}
 Subject: ${subject}
 ${unsubscribeHeader}
@@ -51,7 +52,6 @@ Content-Type: multipart/alternative; boundary="${multipartBoundary}"
 
 --${multipartBoundary}
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
 
 ${plainTextBody}
 
@@ -59,7 +59,7 @@ ${plainTextBody}
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-${bodyHTML}
+${encodedBodyHTML}
 
 --${multipartBoundary}--`;
 

@@ -11,7 +11,8 @@ pushall: sync
 sync:
 	rsync -a $(HOMEDIR) $(USER)@$(SERVER):/opt/ --exclude node_modules/ \
 	  --omit-dir-times --no-perms
-	$(SSHCMD) "cd /opt/$(PROJECTNAME) && npm install"
+	$(SSHCMD) "cd /opt/$(PROJECTNAME) && npm install --ignore-scripts"
+# --ignore-scripts is just to avoid the native quoted-printable.
 
 prettier:
 	prettier --single-quote --write "**/*.js"
@@ -24,7 +25,7 @@ build-html:
 	node sample-rss-into-html.js \
 		--styleMarkupFile behavior/bots-style.html \
 		--numberOfDaysToSample $(DAYSTOSAMPLE) \
-    --postsPerFeed 100 \
+    --postsPerFeed 8 \
     --showFeedTitles false \
     --addLinksToPosts true \
     --enclosureTag ul \

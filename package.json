@@ -30,6 +30,7 @@
     "tape": "^5.0.1"
   },
   "dependencies": {
+    "@ronomon/quoted-printable": "^3.2.1",
     "feed-read": "0.0.1",
     "get-at-path": "^1.0.1",
     "lodash.compact": "^3.0.1",

@@ -14,7 +14,12 @@ function formatRSSPostsIntoHTML({
   linkTitleAliasFn
 }) {
   var formattedGroups = feedPostGroups.map(formatFeedPostGroup);
-  var html = '';
+  var html = `<!DOCTYPE html>
+<html>
+<head>
+  ${styleMarkup}
+</head>
+<body>`;
 
   if (pickSubject) {
     html += `<!--<SUBJECT>${pickSubject(feedPostGroups)}</SUBJECT>-->\n`;
@@ -25,6 +30,9 @@ function formatRSSPostsIntoHTML({
   }
 
   html += formattedGroups.join('\n');
+  html += `</body>
+</html>`;
+
   return html;
 
   function formatFeedPostGroup(feedPostGroup) {
@@ -38,20 +46,13 @@ function formatRSSPostsIntoHTML({
       feedTitle = `<h3 class="feed-title">${feedPostGroup.feedMetadata.title}</h3>`;
     }
 
-    return `<!DOCTYPE html>
-<html>
-<head>
-  ${styleMarkup}
-</head>
-<body>
-<div class="feed-post-group ${postGroupClass}">
+    return `<div class="feed-post-group ${postGroupClass}">
   ${feedTitle}
   <section class="feed-posts">
     ${feedPostGroup.posts.map(formatPost).join('\n')}
   </section>
 </div>
-</body>
-</html>`;
+`;
 
     function formatPost(post) {
       var linkContexts = [];
