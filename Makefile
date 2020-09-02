@@ -25,7 +25,7 @@ build-html:
 	node sample-rss-into-html.js \
 		--styleMarkupFile behavior/bots-style.html \
 		--numberOfDaysToSample $(DAYSTOSAMPLE) \
-    --postsPerFeed 8 \
+    --postsPerFeed 5 \
     --showFeedTitles false \
     --addLinksToPosts true \
     --enclosureTag ul \
