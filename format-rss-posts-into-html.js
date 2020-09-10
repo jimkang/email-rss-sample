@@ -36,10 +36,9 @@ function formatRSSPostsIntoHTML({
   return html;
 
   function formatFeedPostGroup(feedPostGroup) {
-    const postGroupClass = feedPostGroup.feedMetadata.title
-      .replace(/ /g, '-')
-      .replace(/@/g, '')
-      .toLowerCase();
+    const postGroupClass = convertTitleToClass(
+      feedPostGroup.feedMetadata.title
+    );
 
     var feedTitle = '';
     if (showFeedTitles) {
@@ -64,16 +63,18 @@ function formatRSSPostsIntoHTML({
       linkContexts.sort(compareLinkContextIndexesDesc);
 
       linkContexts.forEach(replaceWithAbsoluteURLInContent);
-      var postHTML = `<${enclosureTag} class="post-enclosure">${content}</${enclosureTag}>`;
-      if (addLinksToPosts) {
-        let linkTitle = feedPostGroup.feedMetadata.title;
-        if (linkTitleAliasFn) {
-          linkTitle = linkTitleAliasFn(post);
-        }
-        const linkToPost = `<a href="${post.link}" class="link-to-post"><h3>${linkTitle}</h3></a>`;
-        postHTML = `<${enclosureTag} class="post-enclosure">${linkToPost}\n${content}\n</${enclosureTag}>`;
+      let linkTitle = feedPostGroup.feedMetadata.title;
+      if (linkTitleAliasFn) {
+        linkTitle = linkTitleAliasFn(post);
       }
-      return postHTML;
+      const postClass = convertTitleToClass(linkTitle);
+      var linkToPost = '';
+      if (addLinksToPosts) {
+        linkToPost = `<a href="${post.link}" class="link-to-post"><h3>${linkTitle}</h3></a>`;
+      }
+      return `<${enclosureTag} class="post-enclosure ${postClass}">${
+        linkToPost ? linkToPost + '\n' : ''
+      }${content}\n</${enclosureTag}>`;
 
       function replaceWithAbsoluteURLInContent(localLinkContext) {
         const localURL = localLinkContext[1];
@@ -98,6 +99,13 @@ function compareLinkContextIndexesDesc(a, b) {
   } else {
     return -1;
   }
+}
+
+function convertTitleToClass(title) {
+  return title
+    .replace(/ /g, '-')
+    .replace(/@/g, '')
+    .toLowerCase();
 }
 
 module.exports = formatRSSPostsIntoHTML;
