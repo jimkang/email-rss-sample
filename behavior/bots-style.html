@@ -90,8 +90,18 @@
     text-align: center;
   }
 
-  img[alt="GODTRIBUTES!"] {
-    margin-bottom: 1rem;
+  .post-enclosure.godtributes img {
+    margin-right: 1rem;
+  }
+
+  .post-enclosure.godtributes > li > div:nth-child(2) {
+    display: flex;
+    /* flex-direction is not respected by Gmail. */
+    align-items: center;
+  }
+
+  .post-enclosure.the-most-successful-bot-i-know > li > div:nth-child(2) {
+    text-align: initial;
   }
 
   .intro-message {
