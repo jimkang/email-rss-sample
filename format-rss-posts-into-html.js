@@ -11,6 +11,7 @@ function formatRSSPostsIntoHTML({
   addLinksToPosts = false,
   enclosureTag = 'div',
   introText,
+  closingText,
   linkTitleAliasFn
 }) {
   var formattedGroups = feedPostGroups.map(formatFeedPostGroup);
@@ -30,6 +31,10 @@ function formatRSSPostsIntoHTML({
   }
 
   html += formattedGroups.join('\n');
+
+  if (closingText) {
+    html += closingText;
+  }
   html += `</body>
 </html>`;
 

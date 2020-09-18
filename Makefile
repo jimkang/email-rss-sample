@@ -30,6 +30,7 @@ build-html:
     --addLinksToPosts true \
     --enclosureTag ul \
     --urlPrefixToLinkTitleFile behavior/url-prefixes-for-link-titles.json \
+    --closingTextFile behavior/bots-closing.html \
 		https://theoldreader.com/profile/jimkang.rss \
 		> launch-bay/email.html
 
