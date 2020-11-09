@@ -44,7 +44,6 @@ function formatRSSPostsIntoHTML({
     const postGroupClass = convertTitleToClass(
       feedPostGroup.feedMetadata.title
     );
-
     var feedTitle = '';
     if (showFeedTitles) {
       feedTitle = `<h3 class="feed-title">${feedPostGroup.feedMetadata.title}</h3>`;
@@ -107,10 +106,13 @@ function compareLinkContextIndexesDesc(a, b) {
 }
 
 function convertTitleToClass(title) {
-  return title
-    .replace(/ /g, '-')
-    .replace(/@/g, '')
-    .toLowerCase();
+  if (title) {
+    return title
+      .replace(/ /g, '-')
+      .replace(/@/g, '')
+      .toLowerCase();
+  }
+  return 'post-group';
 }
 
 module.exports = formatRSSPostsIntoHTML;

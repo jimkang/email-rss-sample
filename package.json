@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "@ronomon/quoted-printable": "^3.2.1",
+    "eslint": "^7.13.0",
     "feed-read": "0.0.1",
     "get-at-path": "^1.0.1",
     "lodash.compact": "^3.0.1",
