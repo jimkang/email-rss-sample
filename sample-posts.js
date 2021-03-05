@@ -10,7 +10,9 @@ function samplePosts(
     postsPerFeed = 1,
     startDate,
     endDate,
-    shouldLogFeedErrors
+    shouldLogFeedErrors,
+    sample = true,
+    ignoreDates = false
   },
   done
 ) {
@@ -23,50 +25,58 @@ function samplePosts(
     q.defer(samplePostFromFeed, {
       url,
       probable,
-      sampleSize: postsPerFeed,
       startDate,
       endDate,
       shouldLogFeedErrors
     });
   }
-}
 
-function samplePostFromFeed(
-  { url, probable, sampleSize, startDate, endDate, shouldLogFeedErrors = true },
-  done
-) {
-  feed(url, sb(pickPost, logError));
+  function samplePostFromFeed(
+    { url, probable, startDate, endDate, shouldLogFeedErrors = true },
+    done
+  ) {
+    feed(url, sb(pickPost, logError));
 
-  function pickPost(articles) {
-    //console.log(articles);
-    var eligibleArticles = articles.filter(articleIsInDateRange);
-    //console.log('eligibleArticles', eligibleArticles);
-    var feedPostGroup = {
-      posts: probable
-        .sample(eligibleArticles, sampleSize)
-        .sort(comparePublishedDesc)
-    };
-    if (articles.length > 0) {
-      feedPostGroup.feedMetadata = {
-        title: articles[0].feed.name,
-        link: articles[0].feed.link
+    function pickPost(articles) {
+      //console.log(articles);
+      //console.log('eligibleArticles', eligibleArticles);
+      var posts = articles;
+      if (!ignoreDates) {
+        posts = posts.filter(articleIsInDateRange);
+      }
+      if (sample) {
+        posts = probable.sample(posts, postsPerFeed);
+      } else {
+        posts = posts.slice(0, postsPerFeed);
+      }
+      if (!ignoreDates) {
+        posts.sort(comparePublishedDesc);
+      }
+      var feedPostGroup = {
+        posts
       };
-    }
-    done(null, feedPostGroup);
-  }
-
-  function articleIsInDateRange(article) {
-    //console.log('published is date', article.published instanceof Date);
-    return article.published > startDate && article.published <= endDate;
-  }
-
-  function logError(error) {
-    if (shouldLogFeedErrors) {
-      console.error(error, error.stack);
+      if (articles.length > 0) {
+        feedPostGroup.feedMetadata = {
+          title: articles[0].feed.name,
+          link: articles[0].feed.link
+        };
+      }
+      done(null, feedPostGroup);
     }
 
-    // Don't stop the music.
-    done(null, []);
+    function articleIsInDateRange(article) {
+      //console.log('published is date', article.published instanceof Date);
+      return article.published > startDate && article.published <= endDate;
+    }
+
+    function logError(error) {
+      if (shouldLogFeedErrors) {
+        console.error(error, error.stack);
+      }
+
+      // Don't stop the music.
+      done(null, []);
+    }
   }
 }
 

@@ -24,7 +24,6 @@ test:
 build-html:
 	node sample-rss-into-html.js \
 		--styleMarkupFile behavior/bots-style.html \
-		--numberOfDaysToSample $(DAYSTOSAMPLE) \
     --postsPerFeed 5 \
     --showFeedTitles false \
     --addLinksToPosts true \
@@ -36,6 +35,7 @@ build-html:
 
 # TODO: Generate an intro every email
     # --introTextFile behavior/intro-message.html \
+		--numberOfDaysToSample $(DAYSTOSAMPLE) \
 
 build-email: build-html
 	node html-into-email.js \

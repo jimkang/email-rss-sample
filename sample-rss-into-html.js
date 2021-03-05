@@ -8,7 +8,7 @@ var PickSubjectFromPostGroups = require('./pick-subject-from-post-groups');
 
 var sb = require('standard-bail')();
 
-const dayInMS = 24 * 60 * 60 * 1000;
+//const dayInMS = 24 * 60 * 60 * 1000;
 
 var {
   endDate,
@@ -43,15 +43,16 @@ if (feedURLs.length < 1) {
 
 if (endDate) {
   endDate = new Date(endDate);
-} else {
-  endDate = new Date();
 }
+//} else {
+//endDate = new Date();
+//}
 
 if (!numberOfDaysToSample) {
   numberOfDaysToSample = 1;
 }
 
-var startDate = new Date(endDate.getTime() - numberOfDaysToSample * dayInMS);
+//var startDate = new Date(endDate.getTime() - numberOfDaysToSample * dayInMS);
 
 if (!postsPerFeed) {
   postsPerFeed = 1;
@@ -95,9 +96,11 @@ samplePosts(
   {
     random: Math.random,
     feedURLs,
-    endDate,
-    startDate,
-    postsPerFeed
+    //endDate,
+    //startDate,
+    postsPerFeed,
+    ignoreDates: true,
+    sample: false
   },
   sb(makeHTML, handleError)
 );
