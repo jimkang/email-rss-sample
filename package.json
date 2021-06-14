@@ -24,6 +24,8 @@
   "devDependencies": {
     "assert-no-error": "^1.0.0",
     "d3-queue": "^3.0.7",
+    "eslint": "^7.28.0",
+    "feed-read": "0.0.1",
     "minimist": "^1.2.5",
     "pushstate-server": "^3.1.0",
     "request": "^2.88.0",
@@ -31,14 +33,12 @@
   },
   "dependencies": {
     "@ronomon/quoted-printable": "^3.2.1",
-    "eslint": "^7.13.0",
-    "feed-read": "0.0.1",
     "get-at-path": "^1.0.1",
     "lodash.compact": "^3.0.1",
     "lodash.flatten": "^4.4.0",
     "lodash.pluck": "^3.1.2",
     "probable": "^2.1.4",
-    "sanitize-html": "^1.27.4",
+    "sanitize-html": "^2.4.0",
     "seedrandom": "^3.0.1",
     "standard-bail": "^2.0.1"
   }
