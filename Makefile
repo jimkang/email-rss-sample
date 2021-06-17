@@ -43,6 +43,7 @@ build-email: build-html
 		--from $(FROM_EMAIL) \
 		--unsubscribeEmail $(UNSUB_EMAIL) \
 		--htmlFile launch-bay/email.html \
+    --introTextFile behavior/intro-message.html \
 		> launch-bay/email.txt
 
 send-email:
