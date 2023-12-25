@@ -25,6 +25,7 @@ build-html:
 	node sample-rss-into-html.js \
 		--styleMarkupFile behavior/bots-style.html \
     --postsPerFeed 5 \
+		--ignoreDates true \
     --showFeedTitles false \
     --addLinksToPosts true \
     --enclosureTag ul \
